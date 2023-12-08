@@ -284,7 +284,7 @@
 
 
 ## <a id="title6">6. Отчет по автоматизации:</a>
-(Summary)![https://github.com/Ekaterlna/QADiploma/blob/main/Documentation/Summary.md]
+[Summary](https://github.com/Ekaterlna/QADiploma/blob/main/Documentation/Summary.md "Summary.md")
 
 
 
