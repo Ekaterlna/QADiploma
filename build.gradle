@@ -1,0 +1,28 @@
+plugins {
+    id 'java'
+    id "io.freefair.lombok" version "8.2.2"
+}
+
+group = 'ru.netology'
+version = '1.0-SNAPSHOT'
+
+compileJava.options.encoding = "UTF-8"
+compileTestJava.options.encoding = "UTF-8"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.0'
+    testImplementation 'org.projectlombok:lombok:1.18.28'
+    testImplementation 'com.github.javafaker:javafaker:1.0.2'
+    testImplementation 'mysql:mysql-connector-java:8.0.33'
+    testImplementation 'org.postgresql:postgresql:42.2.20'
+    testImplementation 'commons-dbutils:commons-dbutils:1.7'
+    testImplementation 'com.codeborne:selenide:6.17.2'
+}
+
+test {
+    useJUnitPlatform()
+}

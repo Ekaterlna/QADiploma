@@ -1,0 +1,29 @@
+version: '3.9'
+
+services:
+
+  postgres:
+    image: postgres:16-alpine
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_PASSWORD: pass
+      POSTGRES_USER: app
+      POSTGRES_DB: app
+
+  mysql:
+    restart: always
+    image: mysql
+    ports:
+      - '3306:3306'
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: yes
+      MYSQL_PASSWORD: pass
+      MYSQL_USER: app
+      MYSQL_DATABASE: app
+
+  node-app:
+    image: node-app:1.0
+    ports:
+      - '9999:9999'
+    build: gate-simulator
