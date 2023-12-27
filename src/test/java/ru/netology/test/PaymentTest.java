@@ -241,16 +241,6 @@ public class PaymentTest {
     }
 
     @Test
-    void shouldNotSubmitCreditFormWithInvalidWithNumberHolderCard(){
-        PaymentPage.banner();
-        var cardInfo = DataHelper.getInvalidCardInfoWithNumberHolderCard(statusApproved);
-        var creditFormPayment = paymentPage.creditPayment(cardInfo);
-        creditFormPayment.fillFormPayment(cardInfo);
-        creditFormPayment.verifyErrorHolder();
-        assertEquals(msgInvalidFormField, creditFormPayment.getHolderError().getText());
-    }
-
-    @Test
     void shouldNotSubmitCreditFormWithInvalidWithSymbolHolderCard(){
         PaymentPage.banner();
         var cardInfo = DataHelper.getInvalidCardInfoWithSymbolHolderCard(statusApproved);

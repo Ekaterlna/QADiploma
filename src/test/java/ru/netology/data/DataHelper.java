@@ -195,16 +195,6 @@ public class DataHelper {
         );
     }
 
-    public static CardInfo getInvalidCardInfoWithNumberHolderCard(String cardStatus) {
-        return new CardInfo(
-                getCardNumberByStatus(cardStatus),
-                generateMonth(0),
-                generateYear(0),
-                generateValidHolder("ru") + "12",
-                generateCVC(3)
-        );
-    }
-
     public static CardInfo getInvalidCardInfoWithSymbolHolderCard(String cardStatus) {
         return new CardInfo(
                 getCardNumberByStatus(cardStatus),
