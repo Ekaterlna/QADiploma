@@ -1,6 +1,7 @@
 plugins {
     id 'java'
-    id "io.freefair.lombok" version "8.2.2"
+    id "io.freefair.lombok" version '8.2.2'
+    id 'io.qameta.allure' version '2.9.6'
 }
 
 group = 'ru.netology'
@@ -10,6 +11,7 @@ compileJava.options.encoding = "UTF-8"
 compileTestJava.options.encoding = "UTF-8"
 
 repositories {
+    jcenter()
     mavenCentral()
 }
 
@@ -21,8 +23,20 @@ dependencies {
     testImplementation 'org.postgresql:postgresql:42.2.20'
     testImplementation 'commons-dbutils:commons-dbutils:1.7'
     testImplementation 'com.codeborne:selenide:6.17.2'
+    testImplementation 'io.qameta.allure:allure-selenide:2.23.0'
+    implementation 'com.googlecode.json-simple:json-simple:1.1.1'
+    implementation 'net.gcardone.junidecode:junidecode:0.4.1'
+}
+
+allure {
+    version='2.23.0'
+    useJUnit5 {
+        version='2.23.0'
+    }
 }
 
 test {
     useJUnitPlatform()
+    systemProperty 'selenide.headless', System.getProperty('selenide.headless')
+
 }
