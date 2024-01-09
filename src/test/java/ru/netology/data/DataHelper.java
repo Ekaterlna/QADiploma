@@ -51,7 +51,7 @@ public class DataHelper {
     }
 
     private static String generateYear(int addYear) {
-        return LocalDate.now().plusYears(addYear).format(DateTimeFormatter.ofPattern("YY"));
+        return LocalDate.now().plusYears(addYear).format(DateTimeFormatter.ofPattern("yy"));
     }
 
     private static String generateValidHolder(String locale) {

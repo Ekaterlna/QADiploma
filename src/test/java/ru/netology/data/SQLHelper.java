@@ -16,7 +16,10 @@ public class SQLHelper {
 
     @SneakyThrows
     private static Connection getConn() throws SQLException {
-        return DriverManager.getConnection("jdbc:mysql://localhost:3306/app", "app", "pass");
+        var url = System.getProperty("url");
+        var username = System.getProperty("username");
+        var password = System.getProperty("password");
+        return DriverManager.getConnection(url, username, password);
     }
 
     @SneakyThrows
@@ -29,7 +32,7 @@ public class SQLHelper {
 
     @SneakyThrows
     public static String getPaymentStatus() {
-        var statusSQL = "SELECT status FROM payment_entity ORDER BY created DESC LIMIT 1";
+        var statusSQL = "SELECT * FROM payment_entity ORDER BY created DESC LIMIT 1";
         Connection conn = getConn();
         return runner.query(conn, statusSQL, new ScalarHandler<String>());
     }

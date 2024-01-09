@@ -38,5 +38,7 @@ allure {
 test {
     useJUnitPlatform()
     systemProperty 'selenide.headless', System.getProperty('selenide.headless')
-
+    systemProperty 'url', System.getProperty('url', "jdbc:mysql://localhost:3306/app")
+    systemProperty 'username', System.getProperty('username', "app")
+    systemProperty 'password', System.getProperty('password', "pass")
 }

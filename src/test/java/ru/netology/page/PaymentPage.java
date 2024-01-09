@@ -15,8 +15,8 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
 public class PaymentPage {
-    private static final SelenideElement debitButton = $$("button").find(exactText("Купить"));
-    private static final SelenideElement creditButton = $$("button").find(exactText("Купить в кредит"));
+    private final SelenideElement debitButton = $$("button").find(exactText("Купить"));
+    private final SelenideElement creditButton = $$("button").find(exactText("Купить в кредит"));
     private final SelenideElement notificationOk = $(".notification_status_ok");
     private final SelenideElement notificationError = $(".notification_status_error");
     private final SelenideElement notification = $(".notification");
@@ -24,36 +24,31 @@ public class PaymentPage {
     private final SelenideElement closeNotificationErrorButton = $(".notification_status_error button ");
     private final SelenideElement notificationActual= $(".notification_visible");
 
-
-    @SneakyThrows
     public void verifyNotificationSuccessClose() {
         notificationOk.shouldBe(visible, Duration.ofSeconds(15));
         closeNotificationSuccessButton.click();
         notificationError.shouldBe(hidden);
     }
 
-    @SneakyThrows
     public void verifyNotificationErrorClose() {
         notificationError.shouldBe(visible, Duration.ofSeconds(15));
         closeNotificationErrorButton.click();
         notificationOk.shouldBe(hidden);
     }
 
-    @SneakyThrows
     public void verifyNotification() {
         notification.shouldBe(visible, Duration.ofSeconds(15));
     }
 
-    @SneakyThrows
     public String getActualNotificationMessage() {
         return notificationActual.getText();
     }
 
-    public static class Banner {
-        protected static final SelenideElement headerBanner = $("h2.heading");
-        protected static final SelenideElement imageBanner = $(".Order_cardImage__Q69ii");
-        protected static final SelenideElement nameTravelBanner = $(".Order_cardHeading__2PyrG");
-        protected static final SelenideElement infoTravelBanner = $(".App_appContainer__3jRx1 .list");
+    public class Banner {
+        protected final SelenideElement headerBanner = $("h2.heading");
+        protected final SelenideElement imageBanner = $(".Order_cardImage__Q69ii");
+        protected final SelenideElement nameTravelBanner = $(".Order_cardHeading__2PyrG");
+        protected final SelenideElement infoTravelBanner = $(".App_appContainer__3jRx1 .list");
 
         public Banner bannerMarrakesh() {
             headerBanner.shouldHave(exactText("Путешествие дня")).shouldBe(visible); //
@@ -64,12 +59,12 @@ public class PaymentPage {
         }
     }
 
-    public static Banner banner() {
+    public Banner checkBanner() {
         return new Banner().bannerMarrakesh();
     }
 
     @Value
-    public static class FormPayment {
+    public class FormPayment {
         protected final String headerDebitPayment = "Оплата по карте";
         protected final String headerCreditPayment = "Кредит по данным карты";
 
@@ -131,12 +126,12 @@ public class PaymentPage {
         }
     }
 
-    public static FormPayment debitPayment(DataHelper.CardInfo info) {
+    public FormPayment debitPayment(DataHelper.CardInfo info) {
         debitButton.click();
         return new FormPayment().debitPage();
     }
 
-    public static FormPayment creditPayment(DataHelper.CardInfo info) {
+    public FormPayment creditPayment(DataHelper.CardInfo info) {
         creditButton.click();
         return new FormPayment().creditPage();
     }

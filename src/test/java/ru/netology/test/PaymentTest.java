@@ -15,6 +15,7 @@ import static ru.netology.data.SQLHelper.cleanDatabase;
 public class PaymentTest {
     PaymentPage paymentPage;
 
+
     @BeforeAll
     static void setUpAll() {
         SelenideLogger.addListener("allure", new AllureSelenide());
@@ -37,7 +38,7 @@ public class PaymentTest {
 
     @Test
     void shouldSuccessPaymentDebitApprovedCard(){
-        PaymentPage.banner();
+        paymentPage.checkBanner();
         var cardInfo = DataHelper.getValidCardInfo(statusApproved);
         var debitFormPayment = paymentPage.debitPayment(cardInfo);
         debitFormPayment.fillFormPayment(cardInfo);
@@ -53,7 +54,7 @@ public class PaymentTest {
 
     @Test
     void shouldFailedPaymentDebitDeclinedCard(){
-        PaymentPage.banner();
+        paymentPage.checkBanner();
         var cardInfo = DataHelper.getValidCardInfo(statusDeclined);
         var debitFormPayment = paymentPage.debitPayment(cardInfo);
         debitFormPayment.fillFormPayment(cardInfo);
@@ -69,7 +70,7 @@ public class PaymentTest {
 
     @Test
     void shouldSuccessPaymentCreditApprovedCard(){
-        PaymentPage.banner();
+        paymentPage.checkBanner();
         var cardInfo = DataHelper.getValidCardInfo(statusApproved);
         var creditFormPayment = paymentPage.creditPayment(cardInfo);
         creditFormPayment.fillFormPayment(cardInfo);
@@ -86,7 +87,7 @@ public class PaymentTest {
 
     @Test
     void shouldFailedPaymentCreditDeclinedCard(){
-        PaymentPage.banner();
+        paymentPage.checkBanner();
         var cardInfo = DataHelper.getValidCardInfo(statusDeclined);
         var creditFormPayment = paymentPage.creditPayment(cardInfo);
         creditFormPayment.fillFormPayment(cardInfo);
@@ -102,7 +103,7 @@ public class PaymentTest {
 
     @Test
     void shouldFailedPaymentDebitWithInvalidNumberCard(){
-        PaymentPage.banner();
+        paymentPage.checkBanner();
         var cardInfo = DataHelper.getInvalidCardInfoOtherCard();
         var debitFormPayment = paymentPage.debitPayment(cardInfo);
         debitFormPayment.fillFormPayment(cardInfo);
@@ -112,7 +113,7 @@ public class PaymentTest {
 
     @Test
     void shouldNotVisibleNotificationError() {
-        PaymentPage.banner();
+        paymentPage.checkBanner();
         var cardInfo = DataHelper.getValidCardInfo(statusApproved);
         var debitFormPayment = paymentPage.debitPayment(cardInfo);
         debitFormPayment.fillFormPayment(cardInfo);
@@ -122,7 +123,7 @@ public class PaymentTest {
 
     @Test
     void shouldNotVisibleNotificationSuccess() {
-        PaymentPage.banner();
+        paymentPage.checkBanner();
         var cardInfo = DataHelper.getInvalidCardInfoOtherCard();
         var creditFormPayment = paymentPage.creditPayment(cardInfo);
         creditFormPayment.fillFormPayment(cardInfo);
@@ -132,7 +133,7 @@ public class PaymentTest {
 
     @Test
     void shouldNotSubmitCreditFormWithInvalidSmallNumberCard(){
-        PaymentPage.banner();
+        paymentPage.checkBanner();
         var cardInfo = DataHelper.getInvalidCardInfoSmallNumberCard();
         var creditFormPayment = paymentPage.creditPayment(cardInfo);
         creditFormPayment.fillFormPayment(cardInfo);
@@ -142,7 +143,7 @@ public class PaymentTest {
 
     @Test
     void shouldNotSubmitCreditFormWithInvalidLLetterNumberCard(){
-        PaymentPage.banner();
+        paymentPage.checkBanner();
         var cardInfo = DataHelper.getInvalidCardInfoWithLetterNumberCard();
         var creditFormPayment = paymentPage.creditPayment(cardInfo);
         creditFormPayment.fillFormPayment(cardInfo);
@@ -152,7 +153,7 @@ public class PaymentTest {
 
     @Test
     void shouldNotSubmitDebitFormWithInvalidMonthCard(){
-        PaymentPage.banner();
+        paymentPage.checkBanner();
         var cardInfo = DataHelper.getInvalidCardInfoInvalidMonthCard(statusApproved);
         var debitFormPayment = paymentPage.debitPayment(cardInfo);
         debitFormPayment.fillFormPayment(cardInfo);
@@ -162,7 +163,7 @@ public class PaymentTest {
 
     @Test
     void shouldNotSubmitCreditFormWithInvalidZeroMonthCard(){
-        PaymentPage.banner();
+        paymentPage.checkBanner();
         var cardInfo = DataHelper.getInvalidCardInfoZeroMonthCard(statusApproved);
         var creditFormPayment = paymentPage.creditPayment(cardInfo);
         creditFormPayment.fillFormPayment(cardInfo);
@@ -172,7 +173,7 @@ public class PaymentTest {
 
     @Test
     void shouldNotSubmitDebitFormWithInvalidOneFigureMonthCard(){
-        PaymentPage.banner();
+        paymentPage.checkBanner();
         var cardInfo = DataHelper.getInvalidCardInfoOneFigureMonthCard(statusApproved);
         var debitFormPayment = paymentPage.debitPayment(cardInfo);
         debitFormPayment.fillFormPayment(cardInfo);
@@ -182,7 +183,7 @@ public class PaymentTest {
 
     @Test
     void shouldNotSubmitCreditFormWithInvalidLastMonthCard(){
-        PaymentPage.banner();
+        paymentPage.checkBanner();
         var cardInfo = DataHelper.getInvalidCardInfoLastMonthCard(statusApproved);
         var creditFormPayment = paymentPage.creditPayment(cardInfo);
         creditFormPayment.fillFormPayment(cardInfo);
@@ -192,7 +193,7 @@ public class PaymentTest {
 
     @Test
     void shouldNotSubmitDebitFormWithInvalidLastYearCard(){
-        PaymentPage.banner();
+        paymentPage.checkBanner();
         var cardInfo = DataHelper.getInvalidCardInfoLastYearCard(statusApproved);
         var debitFormPayment = paymentPage.debitPayment(cardInfo);
         debitFormPayment.fillFormPayment(cardInfo);
@@ -202,7 +203,7 @@ public class PaymentTest {
 
     @Test
     void shouldNotSubmitCreditFormWithInvalidBigFutureYearCard(){
-        PaymentPage.banner();
+        paymentPage.checkBanner();
         var cardInfo = DataHelper.getInvalidCardInfoBigFutureYearCard(statusApproved);
         var creditFormPayment = paymentPage.creditPayment(cardInfo);
         creditFormPayment.fillFormPayment(cardInfo);
@@ -212,7 +213,7 @@ public class PaymentTest {
 
     @Test
     void shouldNotSubmitCreditFormWithInvalidOneFigureYearCard(){
-        PaymentPage.banner();
+        paymentPage.checkBanner();
         var cardInfo = DataHelper.getInvalidCardInfoOneFigureYearCard(statusApproved);
         var creditFormPayment = paymentPage.creditPayment(cardInfo);
         creditFormPayment.fillFormPayment(cardInfo);
@@ -222,7 +223,7 @@ public class PaymentTest {
 
     @Test
     void shouldNotSubmitDebitFormWithInvalidNumberHolderCard(){
-        PaymentPage.banner();
+        paymentPage.checkBanner();
         var cardInfo = DataHelper.getInvalidCardInfoNumberHolderCard(statusApproved);
         var debitFormPayment = paymentPage.debitPayment(cardInfo);
         debitFormPayment.fillFormPayment(cardInfo);
@@ -232,7 +233,7 @@ public class PaymentTest {
 
     @Test
     void shouldNotSubmitDebitFormWithInvalidRuHolderCard(){
-        PaymentPage.banner();
+        paymentPage.checkBanner();
         var cardInfo = DataHelper.getInvalidCardInfoRuHolderCard(statusApproved);
         var debitFormPayment = paymentPage.debitPayment(cardInfo);
         debitFormPayment.fillFormPayment(cardInfo);
@@ -242,7 +243,7 @@ public class PaymentTest {
 
     @Test
     void shouldNotSubmitCreditFormWithInvalidWithSymbolHolderCard(){
-        PaymentPage.banner();
+        paymentPage.checkBanner();
         var cardInfo = DataHelper.getInvalidCardInfoWithSymbolHolderCard(statusApproved);
         var creditFormPayment = paymentPage.creditPayment(cardInfo);
         creditFormPayment.fillFormPayment(cardInfo);
@@ -252,7 +253,7 @@ public class PaymentTest {
 
     @Test
     void shouldNotSubmitCreditFormWithInvalidSmallCVCCard(){
-        PaymentPage.banner();
+        paymentPage.checkBanner();
         var cardInfo = DataHelper.getInvalidCardSmallCVCCard(statusApproved);
         var creditFormPayment = paymentPage.creditPayment(cardInfo);
         creditFormPayment.fillFormPayment(cardInfo);
@@ -262,7 +263,7 @@ public class PaymentTest {
 
     @Test
     void shouldNotSubmitCreditFormWithInvalidSymbolCVCCard(){
-        PaymentPage.banner();
+        paymentPage.checkBanner();
         var cardInfo = DataHelper.getInvalidCardWithSymbolCVCCard(statusApproved);
         var creditFormPayment = paymentPage.creditPayment(cardInfo);
         creditFormPayment.fillFormPayment(cardInfo);
@@ -272,7 +273,7 @@ public class PaymentTest {
 
     @Test
     void shouldNotSubmitDebitFormWithEmptyFieldCard(){
-        PaymentPage.banner();
+        paymentPage.checkBanner();
         var cardInfo = DataHelper.getInvalidCardWithEmptyFieldCard();
         var debitFormPayment = paymentPage.debitPayment(cardInfo);
         debitFormPayment.fillFormPayment(cardInfo);
