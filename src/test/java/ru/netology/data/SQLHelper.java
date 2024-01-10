@@ -2,6 +2,8 @@ package ru.netology.data;
 
 import lombok.SneakyThrows;
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.ResultSetHandler;
+import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import java.sql.Connection;
@@ -31,44 +33,23 @@ public class SQLHelper {
     }
 
     @SneakyThrows
-    public static String getPaymentStatus() {
-        var statusSQL = "SELECT * FROM payment_entity ORDER BY created DESC LIMIT 1";
+    public static DataHelper.PaymentEntityTableInfo getPaymentEntityTableInfo() {
         Connection conn = getConn();
-        return runner.query(conn, statusSQL, new ScalarHandler<String>());
+        var requestSQL = "SELECT * FROM payment_entity ORDER BY created DESC LIMIT 1";
+        return runner.query(conn, requestSQL, new BeanHandler<>(DataHelper.PaymentEntityTableInfo.class));
     }
 
     @SneakyThrows
-    public static String getCreditStatus() {
-        var statusSQL = "SELECT status FROM credit_request_entity ORDER BY created DESC LIMIT 1";
+    public static DataHelper.CreditRequestEntityTableInfo getCreditRequestEntityTableInfo() {
+        var requestSQL = "SELECT * FROM credit_request_entity ORDER BY created DESC LIMIT 1";
         Connection conn = getConn();
-        return runner.query(conn, statusSQL, new ScalarHandler<String>());
+        return runner.query(conn, requestSQL, new BeanHandler<>(DataHelper.CreditRequestEntityTableInfo.class));
     }
 
     @SneakyThrows
-    public static String getPaymentID() {
-        var idSQL = "SELECT transaction_id FROM payment_entity ORDER BY created DESC LIMIT 1";
+    public static DataHelper.OrderEntityTableInfo getOrderEntityTableInfo() {
+        var requestSQL = "SELECT * FROM order_entity ORDER BY created DESC LIMIT 1";
         Connection conn = getConn();
-        return runner.query(conn, idSQL, new ScalarHandler<String>());
-    }
-
-    @SneakyThrows
-    public static String getCreditID() {
-        var idSQL = "SELECT bank_id FROM credit_request_entity ORDER BY created DESC LIMIT 1";
-        Connection conn = getConn();
-        return runner.query(conn, idSQL, new ScalarHandler<String>());
-    }
-
-    @SneakyThrows
-    public static String getPaymentOrderID() {
-        var idSQL = "SELECT payment_id FROM order_entity ORDER BY created DESC LIMIT 1";
-        Connection conn = getConn();
-        return runner.query(conn, idSQL, new ScalarHandler<String>());
-    }
-
-    @SneakyThrows
-    public static String getCreditOrderID() {
-        var idSQL = "SELECT credit_id FROM order_entity ORDER BY created DESC LIMIT 1";
-        Connection conn = getConn();
-        return runner.query(conn, idSQL, new ScalarHandler<String>());
+        return runner.query(conn, requestSQL, new BeanHandler<>(DataHelper.OrderEntityTableInfo.class));
     }
 }

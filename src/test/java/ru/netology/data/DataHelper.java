@@ -1,8 +1,7 @@
 package ru.netology.data;
 
 import com.github.javafaker.Faker;
-import lombok.SneakyThrows;
-import lombok.Value;
+import lombok.*;
 import net.gcardone.junidecode.Junidecode;
 import org.checkerframework.checker.units.qual.C;
 import org.json.simple.JSONArray;
@@ -233,5 +232,30 @@ public class DataHelper {
                 "",
                 ""
         );
+    }
+
+    @Data
+    public static class OrderEntityTableInfo {
+        String id;
+        String created;
+        String credit_id;
+        String payment_id;
+    }
+
+    @Data
+    public static class CreditRequestEntityTableInfo {
+        String id;
+        String bank_id;
+        String created;
+        String status;
+    }
+
+    @Data
+    public static class PaymentEntityTableInfo {
+        String id;
+        String amount;
+        String created;
+        String status;
+        String transaction_id;
     }
 }
