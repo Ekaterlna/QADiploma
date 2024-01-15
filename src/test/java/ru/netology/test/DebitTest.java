@@ -74,6 +74,7 @@ public class DebitTest {
         var debitFormPayment = paymentPage.debitPayment(cardInfo);
         debitFormPayment.fillFormPayment(cardInfo);
         debitFormPayment.requestToBank();
+        paymentPage.verifyNotification();
         assertEquals(msgNotificationError, paymentPage.getActualNotificationMessage());
     }
 
@@ -84,6 +85,7 @@ public class DebitTest {
         var debitFormPayment = paymentPage.debitPayment(cardInfo);
         debitFormPayment.fillFormPayment(cardInfo);
         debitFormPayment.requestToBank();
+        paymentPage.verifyNotification();
         paymentPage.verifyNotificationSuccessClose();
     }
 

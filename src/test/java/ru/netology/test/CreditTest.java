@@ -7,6 +7,9 @@ import ru.netology.data.DataHelper;
 import ru.netology.data.SQLHelper;
 import ru.netology.page.PaymentPage;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import static com.codeborne.selenide.Selenide.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static ru.netology.data.SQLHelper.cleanDatabase;
@@ -75,6 +78,7 @@ public class CreditTest {
         var creditFormPayment = paymentPage.creditPayment(cardInfo);
         creditFormPayment.fillFormPayment(cardInfo);
         creditFormPayment.requestToBank();
+        paymentPage.verifyNotification();
         paymentPage.verifyNotificationErrorClose();
     }
 
@@ -114,8 +118,13 @@ public class CreditTest {
         var cardInfo = DataHelper.getInvalidCardInfoLastMonthCard(statusApproved);
         var creditFormPayment = paymentPage.creditPayment(cardInfo);
         creditFormPayment.fillFormPayment(cardInfo);
-        creditFormPayment.verifyErrorMonth();
-        assertEquals(msgInvalidDateField, creditFormPayment.getMonthError().getText());
+        if (LocalDate.now().format(DateTimeFormatter.ofPattern("yy")) != cardInfo.getCardYear()) {
+            creditFormPayment.verifyErrorYear();
+            assertEquals(msgExpiredDateField, creditFormPayment.getYearError().getText());
+        } else {
+            creditFormPayment.verifyErrorMonth();
+            assertEquals(msgInvalidDateField, creditFormPayment.getMonthError().getText());
+        }
     }
 
     @Test

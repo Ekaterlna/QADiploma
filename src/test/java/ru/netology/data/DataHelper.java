@@ -53,6 +53,15 @@ public class DataHelper {
         return LocalDate.now().plusYears(addYear).format(DateTimeFormatter.ofPattern("yy"));
     }
 
+    private static String getMonthFromDateLastMonth() {
+        return LocalDate.now().minusMonths(1).format(DateTimeFormatter.ofPattern("MM"));
+    }
+
+    private static String getYearFromDateLastMonth() {
+        return LocalDate.now().minusMonths(1).format(DateTimeFormatter.ofPattern("yy"));
+    }
+
+
     private static String generateValidHolder(String locale) {
         var faker = new Faker(new Locale(locale));
         String holderRu = faker.name().lastName() + " " + faker.name().firstName();
@@ -137,8 +146,8 @@ public class DataHelper {
     public static CardInfo getInvalidCardInfoLastMonthCard(String cardStatus) {
         return new CardInfo(
                 getCardNumberByStatus(cardStatus),
-                generateMonth(-1),
-                generateYear(0),
+                getMonthFromDateLastMonth(),
+                getYearFromDateLastMonth(),
                 generateValidHolder("ru"),
                 generateCVC(3)
         );
